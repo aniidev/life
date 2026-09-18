@@ -15,8 +15,8 @@ class Creature {
       if(this.pred)
       {
         this.energy += 15;
-        this.weight += 5;
-        this.speed = 1.5;
+        this.weight += 8;
+        this.speed = 1.55;
       }
     }
     
@@ -159,9 +159,15 @@ class Creature {
             
         }
 
-
         if(this.energy <= 0) this.alive = false;
-        else if(this.energy >= 400 )
+        else if(this.energy >= 400 && !this.pred)
+        {
+            this.energy = 150;
+            this.weight /= 2;
+            let child = this.clone();
+            creatureArray.push(child);
+        }
+        else if(this.energy >= 600 && this.pred)
         {
             this.energy = 150;
             this.weight /= 2;
@@ -177,10 +183,14 @@ class Creature {
 
     show() {
         noStroke();
-        fill('white');
         if(this.smart) fill('green')
         if(this.pred) fill('red');
-        
+        if(this.energy <= 10) 
+        {
+            fill('white');
+            if(this.smart)stroke('green')
+            if(this.pred) stroke('red');
+        }
         circle(this.x, this.y, this.weight * 2);
     }
 

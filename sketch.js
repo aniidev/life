@@ -3,7 +3,7 @@ let world;
 function setup() {
     createCanvas(windowWidth, windowHeight);
     frameRate(60);
-    world = new World(50, 500);
+    world = new World(20, 1000);
 }
 
 function draw() {
